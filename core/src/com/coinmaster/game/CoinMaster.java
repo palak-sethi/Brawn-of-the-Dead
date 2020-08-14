@@ -19,11 +19,12 @@ public class CoinMaster extends ApplicationAdapter {
 	Texture dizzy;
 	int manState = 0;
 	int pause = 0;
-	float gravity = 0.2f;
+	float gravity = 0.4f;
 	float velocity = 0;
 	int manY = 0;
 	Rectangle manRectangle;
 	int score = 0;
+	int high = 0;
 	BitmapFont font;
 	int gameState = 0;
 	Random random;
@@ -171,7 +172,9 @@ public class CoinMaster extends ApplicationAdapter {
 		for(int i =0; i<coinRectangles.size(); i++) {
 			if(Intersector.overlaps(manRectangle, coinRectangles.get(i))) {
 				score++;
-
+				if (score>high) {
+					high = score;
+				}
 				coinRectangles.remove(i);
 				coinXs.remove(i);
 				coinYs.remove(i);
@@ -181,12 +184,13 @@ public class CoinMaster extends ApplicationAdapter {
 
 		for(int i =0; i<bombRectangles.size(); i++) {
 			if(Intersector.overlaps(manRectangle, bombRectangles.get(i))) {
-				Gdx.app.log("Bomb!", "Collision!");
 				gameState = 2;
+
 			}
 		}
 
-		font.draw(batch, String.valueOf(score),100, 200);
+		font.draw(batch, String.valueOf(score),Gdx.graphics.getWidth() - 150, Gdx.graphics.getHeight() - 50);
+		font.draw(batch, String.valueOf(high),Gdx.graphics.getWidth() - 150, Gdx.graphics.getHeight() - 250);
 
 		batch.end();
 	}
