@@ -53,7 +53,7 @@ public class CoinMaster extends ApplicationAdapter {
 		man[2] = new Texture("frame-3.png");
 		man[3] = new Texture("frame-4.png");
 
-		manY = Gdx.graphics.getHeight() / 2;
+		manY = 0;
 
 		coin = new Texture("coin.png");
 		bomb = new Texture("bomb.png");
