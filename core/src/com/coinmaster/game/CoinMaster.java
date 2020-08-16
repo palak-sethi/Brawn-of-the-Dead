@@ -19,7 +19,7 @@ public class CoinMaster extends ApplicationAdapter {
 	Texture dizzy;
 	int manState = 0;
 	int pause = 0;
-	float gravity = 0.4f;
+	float gravity = 0.6f;
 	float velocity = 0;
 	int manY = 0;
 	Rectangle manRectangle;
@@ -45,18 +45,23 @@ public class CoinMaster extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		background = new Texture("bg.png");
-		dizzy = new Texture("dizzy-1.png");
-		man = new Texture[4];
-		man[0] = new Texture("frame-1.png");
-		man[1] = new Texture("frame-2.png");
-		man[2] = new Texture("frame-3.png");
-		man[3] = new Texture("frame-4.png");
+		background = new Texture("background.jpg");
+		dizzy = new Texture("dead-1.png");
+		man = new Texture[7];
+		man[0] = new Texture("Run-0.png");
+		man[1] = new Texture("Run-1.png");
+		man[2] = new Texture("Run-2.png");
+		man[3] = new Texture("Run-3.png");
+		man[4] = new Texture("Run-4.png");
+		man[5] = new Texture("Run-5.png");
+		man[6] = new Texture("Run-6.png");
+
+
 
 		manY = 0;
 
-		coin = new Texture("coin.png");
-		bomb = new Texture("bomb.png");
+		coin = new Texture("brain.png");
+		bomb = new Texture("fire.png");
 		random = new Random();
 
 		font = new BitmapFont();
@@ -115,14 +120,14 @@ public class CoinMaster extends ApplicationAdapter {
 
 
 			if(Gdx.input.justTouched()) {
-				velocity = -10;
+				velocity = -15;
 			}
 			if(pause < 8) {
 				pause++;
 			}
 			else {
 				pause = 0;
-				if(manState < 3) {
+				if(manState < 6) {
 					manState++;
 				}
 				else {
@@ -148,7 +153,7 @@ public class CoinMaster extends ApplicationAdapter {
 			//GAME OVER
 			if(Gdx.input.justTouched()) {
 				gameState = 1;
-				manY = Gdx.graphics.getHeight() / 2;
+				manY = 0;
 				score = 0;
 				velocity = 0;
 				coinXs.clear();
@@ -165,9 +170,9 @@ public class CoinMaster extends ApplicationAdapter {
 			batch.draw(dizzy,Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY);
 		}
 		else{
-			batch.draw(man[manState],Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY);
+			batch.draw(man[manState],100 , manY);
 		}
-		manRectangle = new Rectangle(Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2 , manY, man[manState].getWidth(), man[manState].getHeight());
+		manRectangle = new Rectangle(100 , manY, man[manState].getWidth(), man[manState].getHeight());
 
 		for(int i =0; i<coinRectangles.size(); i++) {
 			if(Intersector.overlaps(manRectangle, coinRectangles.get(i))) {
