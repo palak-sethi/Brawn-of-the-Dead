@@ -1,4 +1,4 @@
-# Counting Coins
+# Brawn of the Dead
 An Android(Java) game where you control the character while collecting coins and avoiding bombs.
 
 ## Installation
